@@ -94,6 +94,10 @@ enum {
  Camera:
  - Each node has a camera. By default it points to the center of the CCNode.
  */ 
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+@class CCGestureRecognizer;
+#endif
+
 @interface CCNode : NSObject
 {	
 	// rotation angle
@@ -122,6 +126,14 @@ enum {
 	CGSize	contentSize_;
 	CGSize	contentSizeInPixels_;
 	
+  //untransformed size of the node's touchable area
+  CGSize touchableArea_;
+  CGSize touchableAreaInPixels_;
+  
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED	
+  BOOL isTouchEnabled_;
+#endif
+
 	// transform
 	CGAffineTransform transform_, inverse_;
 #if	CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
@@ -161,7 +173,30 @@ enum {
 #if	CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
 	BOOL isTransformGLDirty_:1;
 #endif
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED  
+  CCArray* gestureRecognizers_;
+#endif
 }
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+-(void) addGestureRecognizer:(CCGestureRecognizer*)gestureRecognizer;
+-(void) removeGestureRecognizer:(CCGestureRecognizer*)gestureRecognizer;
+#endif
+
+/*  used to see if a touch is in a nodes touchAble area, if the area isn't set
+    the content size is used */
+-(BOOL) isPointInArea:(CGPoint)pt;
+-(BOOL) isNodeInTreeTouched:(CGPoint)pt;
+
+/* property for getting/setting touchable area */
+@property(nonatomic,assign) CGSize touchableArea;
+@property(nonatomic,assign) CGSize touchableAreaInPixels;
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+@property(nonatomic,readonly) CCArray *gestureRecognizers;
+@property(nonatomic,assign) BOOL isTouchEnabled;
+#endif
 
 /** The z order of the node relative to it's "brothers": children of the same parent */
 @property(nonatomic,readonly) NSInteger zOrder;

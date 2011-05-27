@@ -55,13 +55,12 @@
 		[self setContentSize:s];
 		self.isRelativeAnchorPoint = NO;
 
-		isTouchEnabled_ = NO;
-
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 		isAccelerometerEnabled_ = NO;
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 		isMouseEnabled_ = NO;
 		isKeyboardEnabled_ = NO;
+        isTouchEnabled_ = NO;
 #endif
 	}
 	
@@ -94,14 +93,11 @@
 	}
 }
 
--(BOOL) isTouchEnabled
-{
-	return isTouchEnabled_;
-}
-
 -(void) setIsTouchEnabled:(BOOL)enabled
 {
-	if( isTouchEnabled_ != enabled ) {
+  if( gestureRecognizers_ != nil )
+    [super setIsTouchEnabled:enabled];
+	else if( isTouchEnabled_ != enabled ) {
 		isTouchEnabled_ = enabled;
 		if( isRunning_ ) {
 			if( enabled )
@@ -197,7 +193,7 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 	// register 'parent' nodes first
 	// since events are propagated in reverse order
-	if (isTouchEnabled_)
+	if (isTouchEnabled_ && gestureRecognizers_ == nil)
 		[self registerWithTouchDispatcher];
 
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)

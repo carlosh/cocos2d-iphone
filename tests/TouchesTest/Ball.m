@@ -17,6 +17,52 @@
 	return [[[self alloc] initWithTexture:aTexture] autorelease];
 }
 
+-(id)initWithTexture:(CCTexture2D *)aTexture
+{
+  self = [super initWithTexture:aTexture];
+  if( self )
+  {
+    isTouchEnabled_ = YES;
+    CCGestureRecognizer* pan = [CCGestureRecognizer CCRecognizerWithRecognizerTargetAction:[[[UIPanGestureRecognizer alloc]init]autorelease] target:self action:@selector(throw:node:)];
+    [self addGestureRecognizer:pan];
+  }
+  return self;
+}
+
+-(void)throw:(UIGestureRecognizer*)recognizer node:(CCNode*)node
+{
+  UIPanGestureRecognizer* pan = (UIPanGestureRecognizer*)recognizer;
+  static CGPoint last;
+  static CGPoint delta;
+  
+  CGPoint pt = [recognizer locationInView:recognizer.view];
+  pt = [[CCDirector sharedDirector] convertToGL:pt];
+
+  switch ([pan state] ) 
+  {
+    case UIGestureRecognizerStateBegan:
+    {
+      last = pt;
+      break;
+    }
+    case UIGestureRecognizerStateChanged:
+    {
+      delta = ccpSub(pt,last);
+      self.position = ccpAdd(self.position, delta );
+      last = pt;
+      break;
+    }
+    case UIGestureRecognizerStateEnded:
+    case UIGestureRecognizerStateCancelled:
+    {
+      velocity = ccpMult(delta,60.0f);
+      break;
+    }
+    default:
+      break;
+  }      
+}
+
 - (void)move:(ccTime)delta
 {
 	self.position = ccpAdd(self.position, ccpMult(velocity, delta));

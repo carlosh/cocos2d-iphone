@@ -48,7 +48,7 @@ enum {
 	
 	ball = [Ball ballWithTexture:[[CCTextureCache sharedTextureCache] addImage:@"ball.png"]];
 	ball.position = CGPointMake(160.0f, 240.0f);
-	ball.velocity = ballStartingVelocity;
+	ball.velocity = CGPointZero;//ballStartingVelocity;
 	[self addChild:ball];
 	
 	CCTexture2D *paddleTexture = [[CCTextureCache sharedTextureCache] addImage:@"paddle.png"];

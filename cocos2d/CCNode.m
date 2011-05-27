@@ -38,6 +38,7 @@
 
 #import <Availability.h>
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+#import "CCGestureRecognizer.h"
 #import "Platforms/iOS/CCDirectorIOS.h"
 #endif
 
@@ -56,6 +57,13 @@
 // used internally to alter the zOrder variable. DON'T call this method manually
 -(void) _setZOrder:(NSInteger) z;
 -(void) detachChild:(CCNode *)child cleanup:(BOOL)doCleanup;
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+// gesture helpers
+-(void) removeAllGestureRecognizers;
+-(void) stopAllGestureRecognizers;
+-(void) startAllGestureRecognizers;
+#endif
 @end
 
 @implementation CCNode
@@ -77,6 +85,13 @@
 @synthesize anchorPoint = anchorPoint_, anchorPointInPixels = anchorPointInPixels_;
 @synthesize contentSize = contentSize_, contentSizeInPixels = contentSizeInPixels_;
 @synthesize isRelativeAnchorPoint = isRelativeAnchorPoint_;
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+@synthesize gestureRecognizers = gestureRecognizers_;
+@synthesize isTouchEnabled;
+#endif
+
+@synthesize touchableArea = touchableArea_,touchableAreaInPixels = touchableAreaInPixels_;
 
 // getters synthesized, setters explicit
 -(void) setRotation: (float)newRotation
@@ -242,7 +257,9 @@
 		positionInPixels_ = position_ = CGPointZero;
 		anchorPointInPixels_ = anchorPoint_ = CGPointZero;
 		contentSizeInPixels_ = contentSize_ = CGSizeZero;
-		
+
+    touchableArea_ = CGSizeZero;
+    touchableAreaInPixels_ = CGSizeZero; 
 		
 		// "whole screen" objects. like Scenes and Layers, should set isRelativeAnchorPoint to NO
 		isRelativeAnchorPoint_ = YES; 
@@ -273,10 +290,189 @@
 
 		//initialize parent to nil
 		parent_ = nil;
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+        // lazy allocation
+        gestureRecognizers_ = nil;
+#endif
 	}
 	
 	return self;
 }
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+- (void)addGestureRecognizer:(CCGestureRecognizer*)gestureRecognizer
+{
+  if( ! gestureRecognizers_ )
+		gestureRecognizers_ = [[CCArray alloc] initWithCapacity:4];
+  
+  [gestureRecognizers_ addObject:gestureRecognizer];
+  gestureRecognizer.node = self;
+  
+  // if we are running we add the recognizer to the view right now
+  // if not we let the one enter take care of it since we don't
+  // want recognizers going off when the node isn't active
+  BOOL enabled = isRunning_ && isTouchEnabled_;
+  gestureRecognizer.gestureRecognizer.enabled = enabled;
+  [[CCDirector sharedDirector].openGLView addGestureRecognizer:gestureRecognizer.gestureRecognizer];
+}
+
+- (void)removeGestureRecognizer:(CCGestureRecognizer*)gestureRecognizer
+{
+  [gestureRecognizers_ removeObject:gestureRecognizer];
+  // this is a sanity check to make sure that someone didn't add the
+  // same gestureRecognizer to different nodes
+  if( gestureRecognizer.node == self )
+    [[CCDirector sharedDirector].openGLView removeGestureRecognizer:gestureRecognizer.gestureRecognizer];
+}
+
+- (void)stopAllGestureRecognizers
+{
+  CCGestureRecognizer* recognizer;
+	CCARRAY_FOREACH(gestureRecognizers_, recognizer)
+  {
+    if( recognizer.node == self )
+      recognizer.gestureRecognizer.enabled = NO;
+  }
+}
+
+-(void) startAllGestureRecognizers
+{
+  CCGestureRecognizer* recognizer;
+	CCARRAY_FOREACH(gestureRecognizers_, recognizer)
+  {
+    if( recognizer.node == self )
+    {
+      recognizer.gestureRecognizer.enabled = isRunning_ && isTouchEnabled_;
+    }
+  }
+}
+
+-(void) removeAllGestureRecognizers
+{
+  CCGestureRecognizer* recognizer;
+	CCARRAY_FOREACH(gestureRecognizers_, recognizer)
+  {
+    if( recognizer.node == self )
+      [[CCDirector sharedDirector].openGLView removeGestureRecognizer:recognizer.gestureRecognizer];
+  }
+}
+
+#endif
+
+-(BOOL) isPointInArea:(CGPoint)pt
+{ 
+  /*  convert the point to the nodes local coordinate system to make it
+   easier to compare against the area the node occupies*/
+  pt = [self convertToNodeSpaceAR:pt];
+  
+  CGRect rect;
+  /*  we should be able to use touchableArea here, even if a node doesn't set
+   this, it will return the contentArea.  */
+  rect.size = self.touchableAreaInPixels;
+  rect.origin = CGPointMake( -(rect.size.width/2.0f), -(rect.size.height/2.0f) );
+  
+  if( CGRectContainsPoint(rect,pt) )
+    return YES;
+  return NO;
+	}
+	
+-(BOOL) isNodeInTreeTouched:(CGPoint)pt
+{
+  if(
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED     
+     isTouchEnabled_ && 
+#endif
+     visible_ && [self isPointInArea:pt] )
+    return YES;
+  
+  BOOL rslt = NO;
+  CCNode* child;
+  CCARRAY_FOREACH(children_, child )
+  {
+    if( [child isNodeInTreeTouched:pt] )
+    {
+      rslt = YES;
+      break;
+    }
+  }
+  return rslt;
+}
+
+-(CGSize) touchableArea
+{
+  // we use content size if touchable area is 0
+  if( touchableArea_.width != 0.0f ||
+      touchableArea_.height != 0.0f )
+    return touchableArea_;
+  else
+    return contentSizeInPixels_;
+}
+
+-(void) setTouchableArea:(CGSize)area
+{
+  touchableArea_ = area;
+                                        
+  if( CC_CONTENT_SCALE_FACTOR() == 1 )
+    touchableAreaInPixels_ = touchableArea_;
+  else
+    touchableAreaInPixels_ = CGSizeMake( area.width * CC_CONTENT_SCALE_FACTOR(), area.height * CC_CONTENT_SCALE_FACTOR() );
+}
+
+-(CGSize) touchableAreaInPixels
+{
+  // we use content size if touchable area is 0
+  if( touchableAreaInPixels_.width != 0.0f ||
+     touchableAreaInPixels_.height != 0.0f )
+    return touchableAreaInPixels_;
+  else
+    return contentSizeInPixels_;;
+}
+
+-(void) setTouchableAreaInPixels:(CGSize)area
+{
+  touchableAreaInPixels_ = area;
+  
+  if( CC_CONTENT_SCALE_FACTOR() == 1 )
+    touchableArea_ = touchableAreaInPixels_;
+  else
+    touchableArea_ = CGSizeMake( area.width / CC_CONTENT_SCALE_FACTOR(), area.height / CC_CONTENT_SCALE_FACTOR() );
+}
+
+-(BOOL) isRunning
+{
+  return isRunning_;
+}
+
+-(void) setIsRunning:(BOOL)running
+{  
+  if( isRunning_ != running )
+  {
+    isRunning_ = running;
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+    if( isRunning_ && isTouchEnabled_ )
+      [self startAllGestureRecognizers];
+    else
+      [self stopAllGestureRecognizers];
+#endif
+  }
+}
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+-(void) setIsTouchEnabled:(BOOL)enabled
+{
+  if( isTouchEnabled_ != enabled )
+  {
+    isTouchEnabled_ = enabled;
+    CCGestureRecognizer *recognizer;
+    CCARRAY_FOREACH(gestureRecognizers_, recognizer)
+    {
+      if( recognizer.node == self )
+        recognizer.gestureRecognizer.enabled = enabled;
+}
+  }
+}
+#endif
 
 - (void)cleanup
 {
@@ -297,6 +493,13 @@
 {
 	CCLOGINFO( @"cocos2d: deallocing %@", self);
 	
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+  // loop through and turn off our gesture recognizers
+  [self stopAllGestureRecognizers];
+  [self removeAllGestureRecognizers];
+  [gestureRecognizers_ release];
+ #endif
+
 	// attributes
 	[camera_ release];
 	
@@ -640,6 +843,12 @@
 	[self resumeSchedulerAndActions];
 	
 	isRunning_ = YES;
+  
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+  if( isTouchEnabled_ )
+    [self startAllGestureRecognizers];
+#endif
+
 }
 
 -(void) onEnterTransitionDidFinish
@@ -649,6 +858,10 @@
 
 -(void) onExit
 {
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+  [self stopAllGestureRecognizers];  
+#endif 
+
 	[self pauseSchedulerAndActions];
 	isRunning_ = NO;	
 	
