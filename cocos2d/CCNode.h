@@ -128,7 +128,6 @@ enum {
 	
   //untransformed size of the node's touchable area
   CGSize touchableArea_;
-  CGSize touchableAreaInPixels_;
   
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED	
   BOOL isTouchEnabled_;

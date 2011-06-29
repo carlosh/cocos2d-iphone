@@ -1568,6 +1568,26 @@
 		8EDF3FDD0F6BE3FC00F54643 /* listener-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDF3FD90F6BE3F400F54643 /* listener-marker.png */; };
 		8EDF3FDE0F6BE3FC00F54643 /* source-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDF3FDA0F6BE3F400F54643 /* source-marker.png */; };
 		AAEA834B0FD5704400F08728 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = AAEA834A0FD5704400F08728 /* blocks.png */; };
+		D8534CD213B83800000AD828 /* TouchesSampleAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8534CD013B837FF000AD828 /* TouchesSampleAppDelegate.h */; };
+		D8534CD313B83800000AD828 /* TouchesSampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8534CD113B83800000AD828 /* TouchesSampleAppDelegate.m */; };
+		D8534CD713B83908000AD828 /* TouchesSampleScene.h in Headers */ = {isa = PBXBuildFile; fileRef = D8534CD513B83908000AD828 /* TouchesSampleScene.h */; };
+		D8534CD813B83908000AD828 /* TouchesSampleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D8534CD613B83908000AD828 /* TouchesSampleScene.m */; };
+		D8534D1913B83BBC000AD828 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B2CB170E10EE0800AE9530 /* main.m */; };
+		D8534D1F13B83BBC000AD828 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		D8534D2013B83BBC000AD828 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		D8534D2113B83BBC000AD828 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */; };
+		D8534D2213B83BBC000AD828 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
+		D8534D2313B83BBC000AD828 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
+		D8534D2413B83BBC000AD828 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5018F24D0DFDEAC400C013A5 /* libcocos2d.a */; };
+		D8534D2513B83BBC000AD828 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 503092B210447296005F7AFC /* libz.dylib */; };
+		D8534D2C13B83C19000AD828 /* TouchesSampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8534CD113B83800000AD828 /* TouchesSampleAppDelegate.m */; };
+		D8534D2D13B83C19000AD828 /* TouchesSampleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D8534CD613B83908000AD828 /* TouchesSampleScene.m */; };
+		D8534D5913B84950000AD828 /* grass-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = D8534D4913B84934000AD828 /* grass-hd.png */; };
+		D8534D5A13B84950000AD828 /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = D8534D4A13B84934000AD828 /* grass.png */; };
+		D8534D5B13B84950000AD828 /* unit-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = D8534D4B13B84934000AD828 /* unit-hd.png */; };
+		D8534D5C13B84950000AD828 /* unit.png in Resources */ = {isa = PBXBuildFile; fileRef = D8534D4C13B84934000AD828 /* unit.png */; };
+		D8534E4113B85D46000AD828 /* grid-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = D8534E3F13B85D35000AD828 /* grid-hd.png */; };
+		D8534E4213B85D46000AD828 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = D8534E4013B85D35000AD828 /* grid.png */; };
 		D8565A27138F433A00515F57 /* CCGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = D8565A25138F433A00515F57 /* CCGestureRecognizer.h */; };
 		D8565A28138F433A00515F57 /* CCGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D8565A26138F433A00515F57 /* CCGestureRecognizer.m */; };
 		D8565A2C138F438300515F57 /* CCGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D8565A26138F433A00515F57 /* CCGestureRecognizer.m */; };
@@ -3258,6 +3278,13 @@
 			remoteGlobalIDString = 5018F24C0DFDEAC400C013A5;
 			remoteInfo = cocos2d;
 		};
+		D8534CF413B83BBC000AD828 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5018F24C0DFDEAC400C013A5;
+			remoteInfo = cocos2d;
+		};
 		DA5F0EC30FFE96D400C7C82E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -4235,6 +4262,19 @@
 		8EDF3FD90F6BE3F400F54643 /* listener-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "listener-marker.png"; path = "experimental/sound-engine/sound-engine-sample/listener-marker.png"; sourceTree = SOURCE_ROOT; };
 		8EDF3FDA0F6BE3F400F54643 /* source-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "source-marker.png"; path = "experimental/sound-engine/sound-engine-sample/source-marker.png"; sourceTree = SOURCE_ROOT; };
 		AAEA834A0FD5704400F08728 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blocks.png; sourceTree = "<group>"; };
+		D8534CD013B837FF000AD828 /* TouchesSampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchesSampleAppDelegate.h; sourceTree = "<group>"; };
+		D8534CD113B83800000AD828 /* TouchesSampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchesSampleAppDelegate.m; sourceTree = "<group>"; };
+		D8534CD513B83908000AD828 /* TouchesSampleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchesSampleScene.h; sourceTree = "<group>"; };
+		D8534CD613B83908000AD828 /* TouchesSampleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchesSampleScene.m; sourceTree = "<group>"; };
+		D8534CDF13B839B6000AD828 /* TouchesSample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TouchesSample-Info.plist"; sourceTree = "<group>"; };
+		D8534D2913B83BBC000AD828 /* TouchesTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchesTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8534D2B13B83BBC000AD828 /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info copy.plist"; path = "Resources/Info copy.plist"; sourceTree = "<group>"; };
+		D8534D4913B84934000AD828 /* grass-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grass-hd.png"; sourceTree = "<group>"; };
+		D8534D4A13B84934000AD828 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		D8534D4B13B84934000AD828 /* unit-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unit-hd.png"; sourceTree = "<group>"; };
+		D8534D4C13B84934000AD828 /* unit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unit.png; sourceTree = "<group>"; };
+		D8534E3F13B85D35000AD828 /* grid-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grid-hd.png"; sourceTree = "<group>"; };
+		D8534E4013B85D35000AD828 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
 		D8565A25138F433A00515F57 /* CCGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGestureRecognizer.h; sourceTree = "<group>"; };
 		D8565A26138F433A00515F57 /* CCGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCGestureRecognizer.m; sourceTree = "<group>"; };
 		DA90D87B1059A54D0039F26A /* FontTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FontTest.h; path = tests/FontTest.h; sourceTree = "<group>"; };
@@ -5174,6 +5214,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D8534D1E13B83BBC000AD828 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8534D1F13B83BBC000AD828 /* Foundation.framework in Frameworks */,
+				D8534D2013B83BBC000AD828 /* UIKit.framework in Frameworks */,
+				D8534D2113B83BBC000AD828 /* CoreGraphics.framework in Frameworks */,
+				D8534D2213B83BBC000AD828 /* OpenGLES.framework in Frameworks */,
+				D8534D2313B83BBC000AD828 /* QuartzCore.framework in Frameworks */,
+				D8534D2413B83BBC000AD828 /* libcocos2d.a in Frameworks */,
+				D8534D2513B83BBC000AD828 /* libz.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA5F0EDA0FFE96D400C7C82E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -5364,6 +5418,7 @@
 				E037DA4C1281C7F0003D39D7 /* Bug458.app */,
 				E0A8C2C7133C335500297B76 /* DirectorTest.app */,
 				E0BD9270134B744600E71F1D /* Bug1159.app */,
+				D8534D2913B83BBC000AD828 /* TouchesTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5395,6 +5450,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				D8534CDF13B839B6000AD828 /* TouchesSample-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -5422,6 +5478,7 @@
 				E02BB582126CA73F006E46A2 /* Icon-72.png */,
 				50B2CEA70E12A58900AE9530 /* ChipmunkDemo-Info.plist */,
 				50B2CB240E10EE4A00AE9530 /* Default.png */,
+				D8534D2B13B83BBC000AD828 /* Info copy.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -5476,6 +5533,7 @@
 		5012DD3E0FE299EA00D6DDD1 /* TouchesTest */ = {
 			isa = PBXGroup;
 			children = (
+				D8534CD413B838C3000AD828 /* Samples */,
 				E0B1F6621266476800ACD961 /* ball-hd.png */,
 				5012DD4B0FE29A7D00D6DDD1 /* ball.png */,
 				E0B1F6631266476800ACD961 /* paddle-hd.png */,
@@ -7003,6 +7061,23 @@
 			path = "sound-engine-sample";
 			sourceTree = "<group>";
 		};
+		D8534CD413B838C3000AD828 /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				D8534E3F13B85D35000AD828 /* grid-hd.png */,
+				D8534E4013B85D35000AD828 /* grid.png */,
+				D8534D4913B84934000AD828 /* grass-hd.png */,
+				D8534D4A13B84934000AD828 /* grass.png */,
+				D8534D4B13B84934000AD828 /* unit-hd.png */,
+				D8534D4C13B84934000AD828 /* unit.png */,
+				D8534CD013B837FF000AD828 /* TouchesSampleAppDelegate.h */,
+				D8534CD113B83800000AD828 /* TouchesSampleAppDelegate.m */,
+				D8534CD513B83908000AD828 /* TouchesSampleScene.h */,
+				D8534CD613B83908000AD828 /* TouchesSampleScene.m */,
+			);
+			name = Samples;
+			sourceTree = "<group>";
+		};
 		E037DA881281EFE2003D39D7 /* Bug-458 */ = {
 			isa = PBXGroup;
 			children = (
@@ -7309,6 +7384,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8565A27138F433A00515F57 /* CCGestureRecognizer.h in Headers */,
+				D8534CD213B83800000AD828 /* TouchesSampleAppDelegate.h in Headers */,
+				D8534CD713B83908000AD828 /* TouchesSampleScene.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8514,6 +8591,24 @@
 			productReference = 8EDF3ED80F6BDA0000F54643 /* SoundEngineTest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D8534CF213B83BBC000AD828 /* Touches Sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8534D2613B83BBC000AD828 /* Build configuration list for PBXNativeTarget "Touches Sample" */;
+			buildPhases = (
+				D8534CF513B83BBC000AD828 /* Resources */,
+				D8534D1813B83BBC000AD828 /* Sources */,
+				D8534D1E13B83BBC000AD828 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8534CF313B83BBC000AD828 /* PBXTargetDependency */,
+			);
+			name = "Touches Sample";
+			productName = TouchesTest;
+			productReference = D8534D2913B83BBC000AD828 /* TouchesTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		DA5F0EC10FFE96D400C7C82E /* Bug422 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA5F0EE10FFE96D400C7C82E /* Build configuration list for PBXNativeTarget "Bug422" */;
@@ -8724,6 +8819,7 @@
 				507C0EE611D609290075E747 /* Bug899 */,
 				502BF54411E39CC30030C477 /* Bug914 */,
 				E0BD924C134B744600E71F1D /* Bug1159 */,
+				D8534CF213B83BBC000AD828 /* Touches Sample */,
 			);
 		};
 /* End PBXProject section */
@@ -10448,6 +10544,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D8534CF513B83BBC000AD828 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8534E4113B85D46000AD828 /* grid-hd.png in Resources */,
+				D8534E4213B85D46000AD828 /* grid.png in Resources */,
+				D8534D5913B84950000AD828 /* grass-hd.png in Resources */,
+				D8534D5A13B84950000AD828 /* grass.png in Resources */,
+				D8534D5B13B84950000AD828 /* unit-hd.png in Resources */,
+				D8534D5C13B84950000AD828 /* unit.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA5F0EC40FFE96D400C7C82E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -11171,6 +11280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8565A28138F433A00515F57 /* CCGestureRecognizer.m in Sources */,
+				D8534CD313B83800000AD828 /* TouchesSampleAppDelegate.m in Sources */,
+				D8534CD813B83908000AD828 /* TouchesSampleScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11429,6 +11540,16 @@
 				8EDF3EFE0F6BDC6300F54643 /* PASoundMgr.m in Sources */,
 				8EDF3EFF0F6BDC6600F54643 /* PASoundListener.m in Sources */,
 				8EDF3F050F6BDC7100F54643 /* SoundEngineTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8534D1813B83BBC000AD828 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8534D2C13B83C19000AD828 /* TouchesSampleAppDelegate.m in Sources */,
+				D8534D2D13B83C19000AD828 /* TouchesSampleScene.m in Sources */,
+				D8534D1913B83BBC000AD828 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12018,6 +12139,11 @@
 			isa = PBXTargetDependency;
 			target = 5018F24C0DFDEAC400C013A5 /* cocos2d */;
 			targetProxy = 8EDF3EAB0F6BDA0000F54643 /* PBXContainerItemProxy */;
+		};
+		D8534CF313B83BBC000AD828 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5018F24C0DFDEAC400C013A5 /* cocos2d */;
+			targetProxy = D8534CF413B83BBC000AD828 /* PBXContainerItemProxy */;
 		};
 		DA5F0EC20FFE96D400C7C82E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -14818,6 +14944,55 @@
 			};
 			name = Release;
 		};
+		D8534D2713B83BBC000AD828 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Resources/Info copy.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TouchesTest;
+			};
+			name = Debug;
+		};
+		D8534D2813B83BBC000AD828 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Resources/Info copy.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TouchesTest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		DA5F0EE20FFE96D400C7C82E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -15693,6 +15868,15 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8534D2613B83BBC000AD828 /* Build configuration list for PBXNativeTarget "Touches Sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8534D2713B83BBC000AD828 /* Debug */,
+				D8534D2813B83BBC000AD828 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

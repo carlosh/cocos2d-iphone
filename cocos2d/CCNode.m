@@ -88,7 +88,7 @@
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 @synthesize gestureRecognizers = gestureRecognizers_;
-@synthesize isTouchEnabled;
+@synthesize isTouchEnabled = isTouchEnabled_;
 #endif
 
 @synthesize touchableArea = touchableArea_,touchableAreaInPixels = touchableAreaInPixels_;
@@ -369,7 +369,7 @@
   CGRect rect;
   /*  we should be able to use touchableArea here, even if a node doesn't set
    this, it will return the contentArea.  */
-  rect.size = self.touchableAreaInPixels;
+  rect.size = self.touchableArea;
   rect.origin = CGPointMake( -(rect.size.width/2.0f), -(rect.size.height/2.0f) );
   
   if( CGRectContainsPoint(rect,pt) )
@@ -406,37 +406,12 @@
       touchableArea_.height != 0.0f )
     return touchableArea_;
   else
-    return contentSizeInPixels_;
+    return contentSize_;
 }
 
 -(void) setTouchableArea:(CGSize)area
 {
   touchableArea_ = area;
-                                        
-  if( CC_CONTENT_SCALE_FACTOR() == 1 )
-    touchableAreaInPixels_ = touchableArea_;
-  else
-    touchableAreaInPixels_ = CGSizeMake( area.width * CC_CONTENT_SCALE_FACTOR(), area.height * CC_CONTENT_SCALE_FACTOR() );
-}
-
--(CGSize) touchableAreaInPixels
-{
-  // we use content size if touchable area is 0
-  if( touchableAreaInPixels_.width != 0.0f ||
-     touchableAreaInPixels_.height != 0.0f )
-    return touchableAreaInPixels_;
-  else
-    return contentSizeInPixels_;;
-}
-
--(void) setTouchableAreaInPixels:(CGSize)area
-{
-  touchableAreaInPixels_ = area;
-  
-  if( CC_CONTENT_SCALE_FACTOR() == 1 )
-    touchableArea_ = touchableAreaInPixels_;
-  else
-    touchableArea_ = CGSizeMake( area.width / CC_CONTENT_SCALE_FACTOR(), area.height / CC_CONTENT_SCALE_FACTOR() );
 }
 
 -(BOOL) isRunning

@@ -17,6 +17,10 @@
   CCNode* downRightGrid;
   
   CCNode* lastNode;
+  
+  float scale;
+  float width;
+  float height;
 }
 @end
 

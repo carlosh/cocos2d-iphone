@@ -26,7 +26,7 @@
 -(void)setupTouch:(CCNode*)node callback:(SEL)callback;
 -(void)select:(UIGestureRecognizer *)recognizer node:(CCNode *)node;
 -(void)move:(UIGestureRecognizer *)recognizer node:(CCNode *)node;
--(void) enable:(CCNode*)node val:(BOOL)val;
+-(void)enable:(CCNode*)node val:(BOOL)val;
 @end
 
 @implementation TouchesSampleLayer
@@ -35,6 +35,18 @@
 {
   if( (self=[super init]) )
   {
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+      scale = 2.0f;
+      width = 768.0f;
+      height = 1024.0f;
+    }
+    else 
+    {
+      scale = 1.0f;
+      width = 320.0f;
+      height = 480.0f;
+    }
     [self setupBackground];
     [self setupUnit];
   }
@@ -58,20 +70,20 @@
   
   CGPoint pos = node.position;
   // setup our move nodes
-  upLeftGrid.position = ccpAdd(ccp(-37.5f,23.0f), pos);
+  upLeftGrid.position = ccpAdd(ccp(-37.5f*scale,23.0f*scale), pos);
   [self enable:upLeftGrid val:YES];
-  downLeftGrid.position = ccpAdd(ccp(-37.5f,-23.0f), pos);
+  downLeftGrid.position = ccpAdd(ccp(-37.5f*scale,-23.0f*scale), pos);
   [self enable:downLeftGrid val:YES];
   
-  upRightGrid.position = ccpAdd(ccp(37.5f,23.0f), pos);
+  upRightGrid.position = ccpAdd(ccp(37.5f*scale,23.0f*scale), pos);
   [self enable:upRightGrid val:YES];
-  downRightGrid.position = ccpAdd(ccp(37.5f,-23.0f), pos);
+  downRightGrid.position = ccpAdd(ccp(37.5f*scale,-23.0f*scale), pos);
   [self enable:downRightGrid val:YES];
   
-  topGrid.position = ccpAdd(ccp(0.0f,46.0f), pos);
+  topGrid.position = ccpAdd(ccp(0.0f*scale,46.0f*scale), pos);
   [self enable:topGrid val:YES];
   
-  bottomGrid.position = ccpAdd(ccp(0.0f,-46.0f), pos);
+  bottomGrid.position = ccpAdd(ccp(0.0f*scale,-46.0f*scale), pos);
   [self enable:bottomGrid val:YES];
 }
 
@@ -83,19 +95,22 @@
 
 -(void) setupUnit
 {
-  CCSprite* sprite = [CCSprite spriteWithFile:@"unit.png"];
-  sprite.position = ccp(150,230);
-  NSLog(@"%f,%f", sprite.touchableArea.width,sprite.touchableArea.height);
+  NSString* unit = @"unit.png";
+  if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    unit = @"unit-hd.png";
+  
+  CCSprite* sprite = [CCSprite spriteWithFile:unit];
+  sprite.position = ccp(150*scale,230*scale);
   [self addChild:sprite];
   [self setupTouch:sprite callback:@selector(select:node:)];
   
-  sprite = [CCSprite spriteWithFile:@"unit.png"];
-  sprite.position = ccp(75,230);
+  sprite = [CCSprite spriteWithFile:unit];
+  sprite.position = ccp(75*scale,230*scale);
   [self addChild:sprite];
   [self setupTouch:sprite callback:@selector(select:node:)];
   
-  sprite = [CCSprite spriteWithFile:@"unit.png"];
-  sprite.position = ccp(225,230);
+  sprite = [CCSprite spriteWithFile:unit];
+  sprite.position = ccp(225*scale,230*scale);
   [self addChild:sprite];
   [self setupTouch:sprite callback:@selector(select:node:)];
   
@@ -109,7 +124,10 @@
 
 -(CCNode*)setupGrid
 {
-  CCSprite* sprite = [CCSprite spriteWithFile:@"grid.png"];
+  NSString* grid = @"grid.png";
+  if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    grid = @"grid-hd.png";
+  CCSprite* sprite = [CCSprite spriteWithFile:grid];
   sprite.visible = NO;
   [self addChild:sprite];
   [self setupTouch:sprite callback:@selector(move:node:)];
@@ -127,22 +145,26 @@
   float x = 0;
   float y = 0;
   int row = 0;
-  while( y < (480.0f+21.5) )
+  NSString* grass = @"grass.png";
+  if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    grass=@"grass-hd.png";
+  
+  while( y < (height+(21.5*scale)) )
   {
-    while( x < 360.0f )
+    while( x < width )
     {
-      CCSprite* sprite = [CCSprite spriteWithFile:@"grass.png"];
+      CCSprite* sprite = [CCSprite spriteWithFile:grass];
       sprite.position = ccp(x,y);
       [self addChild:sprite];
-      x += 75;
+      x += 75*scale;
     }
     row += 1;
     if( (row%2) == 0 )
       x = 0.0f;
     else
-      x = 37.5f;
+      x = 37.5f*scale;
 
-    y += 23.0f;
+    y += 23.0f*scale;
   }
 }
 
